@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 import org.slf4j.Logger;
@@ -33,16 +31,14 @@ public class Router implements SparkApplication {
 
 			Map<String, Object> attributes = new HashMap<>();
 
-			// Exemple 1 (à déplacer dans une classe statique !):
-			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("formation");
-			EntityManager entityManager = entityManagerFactory.createEntityManager();
+			EntityManager entityManager = new EntityManagerInstance().getInstance();
 			
 			// J'ajoute un métier :
 			Demo metier = new Demo();
 			metier.setNom("exemple1");
 
 			entityManager.getTransaction().begin();
-			entityManager.persist(metier);
+			entityManager.persist(metier);		// <- il prend l'object => il trouve auto-increment sur l'Obj -> il auto-increment l'index
 			entityManager.getTransaction().commit();
 
 			TypedQuery<Demo> query = entityManager.createQuery("from Demo", Demo.class);
