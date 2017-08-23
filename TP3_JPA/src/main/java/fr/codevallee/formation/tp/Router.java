@@ -26,22 +26,20 @@ public class Router implements SparkApplication {
 
 		
 		get("/exemple1", (request, response) -> {
-
 			logger.debug("start");
 
-			Map<String, Object> attributes = new HashMap<>();
-
-			EntityManager entityManager = new EntityManagerInstance().getInstance();
+			EntityManager entityManager = EntityManagerInstance.getInstance();
 			
-			// J'ajoute un métier :
-			Demo metier = new Demo();
-			metier.setNom("exemple1");
-
-			entityManager.getTransaction().begin();
-			entityManager.persist(metier);		// <- il prend l'object => il trouve auto-increment sur l'Obj -> il auto-increment l'index
-			entityManager.getTransaction().commit();
+//			Demo metier = new Demo();
+//			metier.setNom("exemple1");
+//
+//			entityManager.getTransaction().begin();
+//			entityManager.persist(metier);		// <- il prend l'object => il trouve auto-increment sur l'Obj -> il auto-increment l'index
+//			entityManager.getTransaction().commit();
 
 			TypedQuery<Demo> query = entityManager.createQuery("from Demo", Demo.class);
+			
+			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("objets", query.getResultList());
 			
 			entityManager.close();
