@@ -29,14 +29,9 @@ public class Router implements SparkApplication {
 		get("/exemple1", (request, response) -> {
 
 			logger.debug("start");
+			
+			EntityManager entityManager = EntityManagerInstance.getInstance();
 
-			Map<String, Object> attributes = new HashMap<>();
-
-			// Exemple 1 (à déplacer dans une classe statique !):
-			EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("formation");
-			EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-			// J'ajoute un métier :
 			Demo metier = new Demo();
 			metier.setNom("exemple1");
 
@@ -45,7 +40,9 @@ public class Router implements SparkApplication {
 			entityManager.getTransaction().commit();
 			entityManager.close();
 
+			Map<String, Object> attributes = new HashMap<>();			
 			return new ModelAndView(attributes, "home.ftl");
+			
 		}, getFreeMarkerEngine());
 
 	}
