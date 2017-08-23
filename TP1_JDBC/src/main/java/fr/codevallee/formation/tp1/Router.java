@@ -20,11 +20,11 @@ public class Router implements SparkApplication {
 		get("/exemple1", (request, response) -> {
 			List<Plat> plats = null;
 			
-			if( !request.queryParams().isEmpty()) {
-				String tarif = request.queryParams("tarif");				// <- http://localhost:9999/exemple1?tarif=5
-				plats = JDBCConnection.getPlatsByPreparedStmtConnection(tarif);				
+			if(request.queryParams().isEmpty()) {
+				plats = JDBCConnection.getPlatsByStmt();	
 			} else {
-				plats = JDBCConnection.getPlatsByStmtConnection();	
+				String tarif = request.queryParams("tarif");				// <- http://localhost:9999/exemple1?tarif=5
+				plats = JDBCConnection.getPlatsByPreparedStmt(tarif);	
 			}	
 			
 			Map<String, Object> attributes = new HashMap<>();
