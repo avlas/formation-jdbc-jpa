@@ -1,6 +1,7 @@
 package fr.codevallee.formation.tp1;
 
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,27 +15,86 @@ import spark.template.freemarker.FreeMarkerEngine;
 
 public class Router implements SparkApplication {
 	EntityManagerInstance emi = new EntityManagerInstance();
-	
+
 	public void init() {
 
-		// http://localhost:9999/modifier
-		get("/modifier", (request, response) -> {
+		// http://localhost:9999/list
+		get("/list", (request, response) -> {
 			Map<String, Object> attributes = new HashMap<>();
-			return new ModelAndView(attributes, "modifier.ftl");
+
+			if (!emi.findAll().isEmpty()) {
+				attributes.put("clients", emi.findAll());
+			} else {
+				System.out.println("LIST IS EMPTY !!!!! ");
+			}
+
+			return new ModelAndView(attributes, "list.ftl");
 		}, getFreeMarkerEngine());
 
-		// http://localhost:9999/resultat?nom=?&prenom=?
-		get("/resultat", (request, response) -> {
-			String nom = request.queryParams("nom");
-			String prenom = request.queryParams("prenom");
-			
-			Client client = new Client(nom, prenom);
+		// http://localhost:9999/add
+		post("/add", (request, response) -> {
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "add.ftl");
+		}, getFreeMarkerEngine());
+
+		// http://localhost:9999/added?firstname=?&lastname=?&age=?
+		get("/added", (request, response) -> {
+			String firstname = request.queryParams("firstname");
+			String lastname = request.queryParams("lastname");
+			int age = Integer.valueOf(request.queryParams("age"));
+
+			Client client = new Client(firstname, lastname, age);
 			emi.insert(client);
+
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("firstname", firstname);
+			attributes.put("lastname", lastname);
+			attributes.put("age", age);
+
+			return new ModelAndView(attributes, "resultat.ftl");
+		}, getFreeMarkerEngine());
+
+		// http://localhost:9999/update?id=?
+		get("/update", (request, response) -> {
+			int id = Integer.valueOf(request.queryParams("id"));
 			
 			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("nom", nom);
-			attributes.put("prenom", prenom);
+			attributes.put("idUser", id);
+			return new ModelAndView(attributes, "update.ftl");
+		}, getFreeMarkerEngine());
+
+		// http://localhost:9999/updated?id=?&firstname=?&lastname=?&age=?
+		get("/updated", (request, response) -> {
+			int id = Integer.valueOf(request.queryParams("id"));			
+			String firstname = request.queryParams("firstname");
+			String lastname = request.queryParams("lastname");
+			int age = Integer.valueOf(request.queryParams("age"));
+
+			emi.update(id, firstname, lastname, age);
+
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("firstname", firstname);
+			attributes.put("lastname", lastname);
+			attributes.put("age", age);
+
 			return new ModelAndView(attributes, "resultat.ftl");
+		}, getFreeMarkerEngine());
+		
+		// http://localhost:9999/delete?id=?
+		get("/delete", (request, response) -> {
+			int id = Integer.valueOf(request.queryParams("id"));
+			
+			emi.delete(id);
+			
+			Map<String, Object> attributes = new HashMap<>();
+			
+			if (!emi.findAll().isEmpty()) {
+				attributes.put("clients", emi.findAll());
+			} else {
+				System.out.println("LIST IS EMPTY !!!!! ");
+			}
+
+			return new ModelAndView(attributes, "list.ftl");
 		}, getFreeMarkerEngine());
 
 	}

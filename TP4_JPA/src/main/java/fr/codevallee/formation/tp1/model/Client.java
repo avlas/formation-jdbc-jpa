@@ -16,15 +16,24 @@ public class Client {
 	
 	private String firstname;
 	private String lastname;
+	private int age;
+	
+	/**
+	 * Default constructor
+	 */
+	public Client() {
+		super();
+	}
 	
 	/**
 	 * @param firstname
 	 * @param lastname
 	 */
-	public Client(String firstname, String lastname) {
+	public Client(String firstname, String lastname, int age) {
 		super();
 		this.firstname = firstname;
 		this.lastname = lastname;
+		this.age = age;
 	}
 	
 	public int getId() {
@@ -35,7 +44,7 @@ public class Client {
 		this.id = id;
 	}
 
-	public String getName() {
+	public String getFirstname() {
 		return firstname;
 	}
 	public void setFirstname(String firstname) {
@@ -44,13 +53,19 @@ public class Client {
 	public String getLastname() {
 		return lastname;
 	}
-	public void setTarif(String lastname) {
+	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	
 	@Override
 	public String toString() {
-		return "Plat [firstname=" + firstname + ", lastname=" + lastname + "]";
+		return "Plat [firstname=" + firstname + ", lastname=" + lastname + ", age=" + age + "]";
 	}	
 	
 }
