@@ -25,7 +25,7 @@ public class Router implements SparkApplication {
 
 		final Logger logger = LoggerFactory.getLogger(Router.class);
 
-		
+		// http://localhost:9999/exemple1
 		get("/exemple1", (request, response) -> {
 
 			logger.debug("start");

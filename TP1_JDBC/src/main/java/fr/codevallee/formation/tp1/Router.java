@@ -17,6 +17,7 @@ public class Router implements SparkApplication {
 
 	public void init() {
 
+		// http://localhost:9999/exemple1
 		get("/exemple1", (request, response) -> {
 			List<Plat> plats = null;
 			

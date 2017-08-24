@@ -15,11 +15,13 @@ public class Router implements SparkApplication {
 
 	public void init() {
 
+		// http://localhost:9999/modifier
 		get("/modifier", (request, response) -> {
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "modifier.ftl");
 		}, getFreeMarkerEngine());
 
+		// http://localhost:9999/resultat?nom=?&prenom=?
 		get("/resultat", (request, response) -> {
 			String nom = request.queryParams("nom");
 			String prenom = request.queryParams("prenom");
