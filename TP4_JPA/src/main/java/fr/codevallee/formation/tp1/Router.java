@@ -25,7 +25,7 @@ public class Router implements SparkApplication {
 			if (!emi.findAll().isEmpty()) {
 				attributes.put("clients", emi.findAll());
 			} else {
-				System.out.println("LIST IS EMPTY !!!!! ");
+				System.out.println("Empty list !!!!! ");
 			}
 
 			return new ModelAndView(attributes, "list.ftl");
@@ -51,7 +51,13 @@ public class Router implements SparkApplication {
 			attributes.put("lastname", lastname);
 			attributes.put("age", age);
 
-			return new ModelAndView(attributes, "resultat.ftl");
+			if (!emi.findAll().isEmpty()) {
+				attributes.put("clients", emi.findAll());
+			} else {
+				System.out.println("Empty list !!!!! ");
+			}
+			
+			return new ModelAndView(attributes, "list.ftl");
 		}, getFreeMarkerEngine());
 
 		// http://localhost:9999/update?id=?
@@ -77,7 +83,13 @@ public class Router implements SparkApplication {
 			attributes.put("lastname", lastname);
 			attributes.put("age", age);
 
-			return new ModelAndView(attributes, "resultat.ftl");
+			if (!emi.findAll().isEmpty()) {
+				attributes.put("clients", emi.findAll());
+			} else {
+				System.out.println("Empty list !!!!! ");
+			}
+			
+			return new ModelAndView(attributes, "list.ftl");
 		}, getFreeMarkerEngine());
 		
 		// http://localhost:9999/delete?id=?
@@ -91,7 +103,7 @@ public class Router implements SparkApplication {
 			if (!emi.findAll().isEmpty()) {
 				attributes.put("clients", emi.findAll());
 			} else {
-				System.out.println("LIST IS EMPTY !!!!! ");
+				System.out.println("Empty list  !!!!! ");
 			}
 
 			return new ModelAndView(attributes, "list.ftl");

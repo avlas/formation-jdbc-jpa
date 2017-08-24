@@ -12,14 +12,14 @@
 		  </tr>
 			
 		 <#list clients as client>
-		  <tr>
-		    	<td>${client.id}</td>
-			    <td>${client.firstname}</td>
-			  	<td>${client.lastname}</td>
-			    <td>${client.age}</td>
-			    <td> <a href="update?id=${client.id}"> Update </a> </td> 
-			    <td> <a href="delete?id=${client.id}"> Delete </a> </td> 
-		  </tr>
+			  <tr>
+			    	<td>${client.id}</td>
+				    <td>${client.firstname}</td>
+				  	<td>${client.lastname}</td>
+				    <td>${client.age}</td>
+				    <td> <a href="update?id=${client.id}"> Update </a> </td> 
+				    <td> <a href="delete?id=${client.id}"> Delete </a> </td> 
+			  </tr>
 		  </#list>
 	</table>
 
