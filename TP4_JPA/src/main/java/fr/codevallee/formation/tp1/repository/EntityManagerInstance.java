@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp1;
+package fr.codevallee.formation.tp1.repository;
 
 import java.util.List;
 

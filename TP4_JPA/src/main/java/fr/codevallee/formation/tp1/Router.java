@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fr.codevallee.formation.tp1.model.Client;
+import fr.codevallee.formation.tp1.repository.EntityManagerInstance;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import spark.ModelAndView;
