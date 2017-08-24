@@ -7,26 +7,26 @@ import fr.codevallee.formation.tp1.dao.ClientDao;
 
 public class ClientRepository implements IClientRepository {
 
-	private static ClientDao entityManagerDao = new ClientDao();
+	private static ClientDao clientDao = new ClientDao();
 	
 	@Override
 	public List<Client> findAll() {
-		return entityManagerDao.findAll();
+		return clientDao.findAll();
 	}
 
 	@Override
 	public void insert(Client client) {
-		entityManagerDao.insert(client);
+		clientDao.insert(client);
 	}
 
 	@Override
 	public void update(int id, String firstname, String lastname, int age) {
-		entityManagerDao.update(id, firstname, lastname, age);		
+		clientDao.update(id, firstname, lastname, age);		
 	}
 
 	@Override
 	public void delete(int id) {
-		entityManagerDao.delete(id);	
+		clientDao.delete(id);	
 	}
 
 }
