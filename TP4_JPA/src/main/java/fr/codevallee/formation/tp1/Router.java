@@ -5,6 +5,7 @@ import static spark.Spark.get;
 import java.util.HashMap;
 import java.util.Map;
 
+import fr.codevallee.formation.tp1.model.Client;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import spark.ModelAndView;
@@ -12,7 +13,8 @@ import spark.servlet.SparkApplication;
 import spark.template.freemarker.FreeMarkerEngine;
 
 public class Router implements SparkApplication {
-
+	EntityManagerInstance emi = new EntityManagerInstance();
+	
 	public void init() {
 
 		// http://localhost:9999/modifier
@@ -25,6 +27,10 @@ public class Router implements SparkApplication {
 		get("/resultat", (request, response) -> {
 			String nom = request.queryParams("nom");
 			String prenom = request.queryParams("prenom");
+			
+			Client client = new Client(nom, prenom);
+			emi.insert(client);
+			
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("nom", nom);
 			attributes.put("prenom", prenom);

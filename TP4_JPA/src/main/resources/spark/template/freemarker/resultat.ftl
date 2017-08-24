@@ -1,10 +1,11 @@
 <html>
 
+	This is the new client, inserted into DB :
+	<br>
 	Nom : ${nom}	
 	<br>
 	
-	Prénom : ${prenom}	
-	<br>
-	
+	Prï¿½nom : ${prenom}	
+	<br>	
 
 </html>
