@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp1.model;
+package fr.codevallee.formation.tp1.dao;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

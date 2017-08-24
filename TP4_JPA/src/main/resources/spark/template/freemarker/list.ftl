@@ -1,8 +1,4 @@
 <html>
-	List of clients :
-	<br>
-	<br>
-	
 	<table>
 		  <tr>
 		   		<th>Id</th>
@@ -24,7 +20,7 @@
 	</table>
 
 	<br> 
-	<form action="/add" method="post">
+	<form action="/addClient" method="post">
 		<button type="submit">Add client</button>
 	</form>
 

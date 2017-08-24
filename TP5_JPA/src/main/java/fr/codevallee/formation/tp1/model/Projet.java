@@ -20,8 +20,8 @@ public class Projet {
 	@Column(length=40)
 	private String nom ;
 
-//	@ManyToMany(mappedBy="projets")
-//	private Set<Elu> elus;
+	@ManyToMany(mappedBy="projets")
+	private Set<Elu> elus;
 	
 	public Long getId() {
 		return id;

@@ -6,18 +6,17 @@
 		<table>
 			<tr>
 		  	 	<td> <input hidden type="text" name="id" value="${idUser}"> </td>
-			  </tr>
+			</tr>
 			<tr>
-			<tr>
-		  		<td>Firstname :</td>
+		  		<td>Firstname</td>
 		  	 	<td> <input type="text" name="firstname"> </td>
-			  </tr>
+			</tr>
 			<tr>
-		  	 	<td>Lastname :</td>	  	 	
+		  	 	<td>Lastname</td>	  	 	
 			  	<td> <input type="text" name="lastname"> </td>
 		 	</tr>
 		  	<tr>
-			  	<td>Age :</td>	
+			  	<td>Age</td>	
 			    <td> <input type="text" name="age"> </td>
 			</tr>
 		</table>

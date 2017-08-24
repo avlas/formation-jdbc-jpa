@@ -12,7 +12,7 @@ import javax.persistence.TypedQuery;
 import fr.codevallee.formation.tp1.model.Client;
 import fr.codevallee.formation.tp1.model.Commune;
 import fr.codevallee.formation.tp1.model.Maire;
-import fr.codevallee.formation.tp1.repository.EntityManagerInstance;
+import fr.codevallee.formation.tp1.repositories.EntityManagerDao;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import spark.ModelAndView;
@@ -20,7 +20,7 @@ import spark.servlet.SparkApplication;
 import spark.template.freemarker.FreeMarkerEngine;
 
 public class Router implements SparkApplication {
-	EntityManagerInstance emi = new EntityManagerInstance();
+	EntityManagerDao emi = new EntityManagerDao();
 
 	public void init() {
 

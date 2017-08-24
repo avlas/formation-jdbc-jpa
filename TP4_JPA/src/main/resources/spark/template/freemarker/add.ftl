@@ -1,19 +1,19 @@
 <html>
 	<br>
-	Add new client :	
+	Add a client :	
 	
-	<form action="/added" method="get">
+	<form action="/add" method="post">
 		<table>
 			<tr>
-		  		<td>Firstname :</td>
+		  		<td>Firstname</td>
 		  	 	<td> <input type="text" name="firstname"> </td>
 			  </tr>
 			<tr>
-		  	 	<td>Lastname :</td>	  	 	
+		  	 	<td>Lastname</td>	  	 	
 			  	<td> <input type="text" name="lastname"> </td>
 		 	</tr>
 		  	<tr>
-			  	<td>Age :</td>	
+			  	<td>Age</td>	
 			    <td> <input type="text" name="age"> </td>
 			</tr>
 		</table>

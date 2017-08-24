@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp1.repository;
+package fr.codevallee.formation.tp1.repositories;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 
 import fr.codevallee.formation.tp1.model.Client;
 
-public class EntityManagerInstance {
+public class EntityManagerDao {
 	private static EntityManager entityManager = getInstance();
 	
 	public static EntityManager getInstance() {
@@ -27,8 +27,7 @@ public class EntityManagerInstance {
 		}
 	}
 
-	public void insert(Client client) {
-		
+	public void insert(Client client) {		
 		entityManager.getTransaction().begin();
 		entityManager.persist(client); // <- il prend l'object => il trouve
 										// auto-increment sur l'Obj -> il
