@@ -27,8 +27,7 @@ public class EntityManagerInstance {
 		}
 	}
 
-	public void insert(Client client) {
-		
+	public void insert(Client client) {		
 		entityManager.getTransaction().begin();
 		entityManager.persist(client); // <- il prend l'object => il trouve
 										// auto-increment sur l'Obj -> il

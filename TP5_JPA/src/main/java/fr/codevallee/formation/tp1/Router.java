@@ -6,7 +6,12 @@ import static spark.Spark.post;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+
 import fr.codevallee.formation.tp1.model.Client;
+import fr.codevallee.formation.tp1.model.Commune;
+import fr.codevallee.formation.tp1.model.Maire;
 import fr.codevallee.formation.tp1.repository.EntityManagerInstance;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
@@ -20,17 +25,29 @@ public class Router implements SparkApplication {
 	public void init() {
 
 		get("/exemple1", (request, response) -> {
-//			EntityManager em = EntityManagerInstance.getInstance();
-//
-//			Demo metier = new Demo();
-//			metier.setNom("exemple1");
-//
-//			entityManager.getTransaction().begin();
-//			entityManager.persist(metier);
-//			entityManager.getTransaction().commit();
-//			entityManager.close();
-
-			Map<String, Object> attributes = new HashMap<>();			
+			EntityManager em = emi.getInstance();
+			
+//			Maire maire1 = new Maire();
+//			maire1.setNom("Titi");
+//			
+//			Commune commune1 = new Commune();
+//			maire1.setCommune(commune1);
+//			
+//			em.getTransaction().begin();
+//			em.persist(commune1); // <- il prend l'object => il trouve
+//											// auto-increment sur l'Obj -> il
+//											// auto-increment l'index
+//			em.getTransaction().commit();
+			
+//			TypedQuery<Maire> query = emi.getInstance().createQuery("from Maire", Maire.class);
+			
+			Map<String, Object> attributes = new HashMap<>();		
+//			attributes.put("maires", query.getResultList());
+//			
+//			for (Maire maire : query.getResultList()) {
+//				System.out.println(maire.getNom() + ", "+ maire.getCommune() );
+//			}
+			
 			return new ModelAndView(attributes, "home.ftl");
 		}, getFreeMarkerEngine());
 		
