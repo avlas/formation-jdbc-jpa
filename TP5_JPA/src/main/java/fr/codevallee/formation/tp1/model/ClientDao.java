@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp1.repositories;
+package fr.codevallee.formation.tp1.model;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 
 import fr.codevallee.formation.tp1.model.Client;
 
-public class EntityManagerDao {
+public class ClientDao {
 	private static EntityManager entityManager = getInstance();
 	
 	public static EntityManager getInstance() {
