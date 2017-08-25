@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 public class EntityManagerInstance {
 	
 	public static EntityManager getInstance() {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("formation");
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("election");
 		return entityManagerFactory.createEntityManager();
 	}	
 }
