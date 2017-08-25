@@ -1,0 +1,7 @@
+<html>
+
+Bonjour !
+
+${(valeur)!}
+
+</html>
