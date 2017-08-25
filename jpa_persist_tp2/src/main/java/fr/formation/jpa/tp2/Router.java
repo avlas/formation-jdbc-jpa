@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.formation.jpa.tp2.modele.Demo;
+import fr.formation.jpa.tp2.model.Demo;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import spark.ModelAndView;

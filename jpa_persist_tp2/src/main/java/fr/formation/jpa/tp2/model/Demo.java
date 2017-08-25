@@ -1,4 +1,4 @@
-package fr.formation.jpa.tp2.modele;
+package fr.formation.jpa.tp2.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
