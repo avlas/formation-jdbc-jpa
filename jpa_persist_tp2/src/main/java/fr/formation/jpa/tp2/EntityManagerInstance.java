@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp;
+package fr.formation.jpa.tp2;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

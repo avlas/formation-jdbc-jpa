@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp;
+package fr.formation.jpa.tp2;
 
 import static spark.Spark.get;
 
@@ -6,18 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
-import fr.codevallee.formation.tp.modele.Demo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import fr.formation.jpa.tp2.modele.Demo;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import spark.ModelAndView;
 import spark.servlet.SparkApplication;
 import spark.template.freemarker.FreeMarkerEngine;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class Router implements SparkApplication {
 
@@ -25,8 +23,8 @@ public class Router implements SparkApplication {
 
 		final Logger logger = LoggerFactory.getLogger(Router.class);
 
-		// http://localhost:9999/exemple1
-		get("/exemple1", (request, response) -> {
+		// http://localhost:9999/demo
+		get("/demo/add", (request, response) -> {
 
 			logger.debug("start");
 			

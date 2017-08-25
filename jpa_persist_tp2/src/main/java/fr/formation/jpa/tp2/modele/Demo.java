@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp.modele;
+package fr.formation.jpa.tp2.modele;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +8,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "demo")
-
 public class Demo {
 
 	@Id
