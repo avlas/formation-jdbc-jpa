@@ -17,14 +17,14 @@ public class Router implements SparkApplication {
 
 	public void init() {
 
-		// http://localhost:9999/exemple1
+		// http://localhost:9999/plats
 		get("/plats", (request, response) -> {
 			List<Plat> plats = null;
 			
 			if(request.queryParams().isEmpty()) {
-				plats = Connection_JDBC_MySQL.getPlatsByStmt();	
+				plats = Connection_JDBC_MySQL.getPlatsByStmt();				// <- http://localhost:9999/plats
 			} else {
-				String tarif = request.queryParams("tarif");				// <- http://localhost:9999/exemple1?tarif=5
+				String tarif = request.queryParams("tarif");				// <- http://localhost:9999/plats?tarif=5
 				plats = Connection_JDBC_MySQL.getPlatsByPreparedStmt(tarif);	
 			}	
 			
