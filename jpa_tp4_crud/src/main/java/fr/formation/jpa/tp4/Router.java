@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp1;
+package fr.formation.jpa.tp4;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fr.codevallee.formation.tp1.dao.Client;
-import fr.codevallee.formation.tp1.repositories.ClientRepository;
-import fr.codevallee.formation.tp1.repositories.IClientRepository;
+import fr.formation.jpa.tp4.dao.Client;
+import fr.formation.jpa.tp4.repositories.ClientServiceImpl;
+import fr.formation.jpa.tp4.repositories.IClientService;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import spark.ModelAndView;
@@ -18,7 +18,7 @@ import spark.servlet.SparkApplication;
 import spark.template.freemarker.FreeMarkerEngine;
 
 public class Router implements SparkApplication {
-	IClientRepository repo = new ClientRepository();
+	IClientService clientService = new ClientServiceImpl();
 	
 	public static List<Client> clients = new ArrayList<Client>();
 	Map<String, Object> attributes = new HashMap<>();
@@ -52,7 +52,7 @@ public class Router implements SparkApplication {
 //			}
 
 			Client client = new Client(firstname, lastname, age);
-			repo.insert(client);
+			clientService.insert(client);
 
 			attributes = getClientsMap();			
 			return new ModelAndView(attributes, "list.ftl");
@@ -79,7 +79,7 @@ public class Router implements SparkApplication {
 			String lastname = request.queryParams("lastname");
 			int age = Integer.valueOf(request.queryParams("age"));
 
-			repo.update(id, firstname, lastname, age);
+			clientService.update(id, firstname, lastname, age);
 
 			attributes = getClientsMap();			
 			return new ModelAndView(attributes, "list.ftl");
@@ -91,7 +91,7 @@ public class Router implements SparkApplication {
 			
 			int id = Integer.valueOf(request.queryParams("id"));
 			
-			repo.delete(id);
+			clientService.delete(id);
 			
 			attributes = getClientsMap();
 			return new ModelAndView(attributes, "list.ftl");
@@ -103,7 +103,7 @@ public class Router implements SparkApplication {
 	protected Map<String, Object> getClientsMap() {
 		attributes.clear();
 		
-		clients = repo.findAll();
+		clients = clientService.findAll();
 		
 		if (!clients.isEmpty()) {
 			attributes.put("clients", clients);

@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.codevallee</groupId>
-	<artifactId>TP4_JPA</artifactId>
+	<groupId>fr.formation.jpa</groupId>
+	<artifactId>jpa_tp4_crud</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>TP4_JPA</name>
+	<name>jpa_tp4_crud</name>
 
 	<properties>
 		<jdk.version>1.8</jdk.version>

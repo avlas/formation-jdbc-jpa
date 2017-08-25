@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp1.dao;
+package fr.formation.jpa.tp4.dao;
 
 import java.util.List;
 
@@ -7,11 +7,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-public class ClientDao {
+public class ClientRepository {
 	private static EntityManager entityManager = getInstance();
 	
 	public static EntityManager getInstance() {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("formation");
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("restaurant");
 		return entityManagerFactory.createEntityManager();
 	}
 

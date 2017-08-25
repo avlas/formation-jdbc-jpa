@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp1.dao;
+package fr.formation.jpa.tp4.dao;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

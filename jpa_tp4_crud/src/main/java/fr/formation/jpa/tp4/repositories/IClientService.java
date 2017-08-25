@@ -1,10 +1,10 @@
-package fr.codevallee.formation.tp1.repositories;
+package fr.formation.jpa.tp4.repositories;
 
 import java.util.List;
 
-import fr.codevallee.formation.tp1.dao.Client;
+import fr.formation.jpa.tp4.dao.Client;
 
-public interface IClientRepository {
+public interface IClientService {
 
 	List<Client> findAll();
 	
