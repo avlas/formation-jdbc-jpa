@@ -38,18 +38,12 @@ public class Router implements SparkApplication {
 			em.persist(maire1);
 			em.persist(commune1);
 			em.getTransaction().commit();
-
-			TypedQuery<Maire> query = em.createQuery("from Maire", Maire.class);
-			for (Maire maire : query.getResultList()) {
-				System.out.println(maire.getNom());
+			
+			TypedQuery<Commune> communes = em.createQuery("from Commune", Commune.class);
+			for (Commune commune : communes.getResultList()) {
+				System.out.println("Commune name : " + commune.getNom() + ", Maire : "+ commune.getMaire() );
 			}
 			
-			// EXCEPTION => Commune not mapped			
-/*			TypedQuery<Commune> query = em.createQuery("from Communes", Commune.class);
-			for (Commune commune : query.getResultList()) {
-				System.out.println(commune.getNom() + ", "+ commune.getMaire() );
-			}
-*/
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "home.ftl");
 
