@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.formation.jpa</groupId>
-	<artifactId>jpa_tp7_OneToMany_uni</artifactId>
+	<artifactId>jpa_tp7_OneToMany</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>jpa_tp7_OneToMany_uni</name>
+	<name>jpa_tp7_OneToMany</name>
 
 	<properties>
 		<jdk.version>1.8</jdk.version>
