@@ -1,4 +1,4 @@
-package fr.formation.jpa.tp6;
+package fr.formation.jpa.tp7;
 
 import static spark.Spark.get;
 
@@ -11,9 +11,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import fr.formation.jpa.tp6.model.Commune;
-import fr.formation.jpa.tp6.model.Elu;
-import fr.formation.jpa.tp6.model.Maire;
+import fr.formation.jpa.tp7.model.Commune;
+import fr.formation.jpa.tp7.model.Elu;
+import fr.formation.jpa.tp7.model.Maire;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import spark.ModelAndView;

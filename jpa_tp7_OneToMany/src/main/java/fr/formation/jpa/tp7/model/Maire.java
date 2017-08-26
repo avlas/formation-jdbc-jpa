@@ -1,4 +1,4 @@
-package fr.formation.jpa.tp6.model;
+package fr.formation.jpa.tp7.model;
 
 import java.util.HashSet;
 import java.util.Set;
