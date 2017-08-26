@@ -1,0 +1,17 @@
+     PreparedStatement recherchePersonne = 
+        con.prepareStatement("SELECT * FROM personnes WHERE nom_personne = ?");
+
+      recherchePersonne.setString(1, "nom3");
+
+      resultats = recherchePersonne.executeQuery();
+
+      affiche("parcours des données retournées");
+
+      boolean encore = resultats.next();
+
+      while (encore) {
+        System.out.print(resultats.getInt(1) + " :  "+resultats.getString(2)+" "+
+          resultats.getString(3)+"("+resultats.getDate(4)+")");
+        System.out.println();
+        encore = resultats.next();
+      }
