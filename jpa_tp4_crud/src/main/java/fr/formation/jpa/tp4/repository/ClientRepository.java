@@ -1,4 +1,4 @@
-package fr.formation.jpa.tp4.dao;
+package fr.formation.jpa.tp4.repository;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
+
+import fr.formation.jpa.tp4.model.Client;
 
 public class ClientRepository {
 	private static EntityManager entityManager = getInstance();

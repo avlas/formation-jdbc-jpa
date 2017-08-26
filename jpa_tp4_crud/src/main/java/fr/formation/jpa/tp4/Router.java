@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fr.formation.jpa.tp4.dao.Client;
-import fr.formation.jpa.tp4.repositories.ClientServiceImpl;
-import fr.formation.jpa.tp4.repositories.IClientService;
+import fr.formation.jpa.tp4.model.Client;
+import fr.formation.jpa.tp4.services.ClientServiceImpl;
+import fr.formation.jpa.tp4.services.IClientService;
 import freemarker.template.Configuration;
 import freemarker.template.Version;
 import spark.ModelAndView;

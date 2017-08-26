@@ -1,8 +1,8 @@
-package fr.formation.jpa.tp4.repositories;
+package fr.formation.jpa.tp4.services;
 
 import java.util.List;
 
-import fr.formation.jpa.tp4.dao.Client;
+import fr.formation.jpa.tp4.model.Client;
 
 public interface IClientService {
 

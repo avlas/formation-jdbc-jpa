@@ -1,9 +1,9 @@
-package fr.formation.jpa.tp4.repositories;
+package fr.formation.jpa.tp4.services;
 
 import java.util.List;
 
-import fr.formation.jpa.tp4.dao.Client;
-import fr.formation.jpa.tp4.dao.ClientRepository;
+import fr.formation.jpa.tp4.model.Client;
+import fr.formation.jpa.tp4.repository.ClientRepository;
 
 public class ClientServiceImpl implements IClientService {
 

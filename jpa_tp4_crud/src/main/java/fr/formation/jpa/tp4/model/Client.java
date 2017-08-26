@@ -1,4 +1,4 @@
-package fr.formation.jpa.tp4.dao;
+package fr.formation.jpa.tp4.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,10 +38,6 @@ public class Client {
 	
 	public int getId() {
 		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getFirstname() {
