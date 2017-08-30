@@ -22,36 +22,40 @@ import fr.codevallee.formation.tp.modele.BillLine;
 import fr.codevallee.formation.tp.modele.Client;
 import fr.codevallee.formation.tp.modele.Description;
 import fr.codevallee.formation.tp.modele.Status;
+import fr.codevallee.formation.tp.repositories.FacturationRepository;
+import fr.codevallee.formation.tp.service.FacturationServiceImpl;
 import spark.ModelAndView;
 import spark.servlet.SparkApplication;
 import spark.template.freemarker.FreeMarkerEngine;
 
 public class Router implements SparkApplication {
 
-	//FacturationServiceImpl facturationServiceImpl = null;
+	FacturationServiceImpl facturationServiceImpl = null;
 
 	public void init() {
 
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("facturation");
-		EntityManager em = entityManagerFactory.createEntityManager();
+	//	facturationServiceImpl = new FacturationServiceImpl();
 		
-		//facturationServiceImpl = new FacturationServiceImpl();
+		 EntityManagerFactory entityManagerFactory =
+		 Persistence.createEntityManagerFactory("facturation");
+		 EntityManager em = entityManagerFactory.createEntityManager();
+
 
 		get("/init", (request, response) -> {
 
-			//facturationServiceImpl.initDatabase();
-			
+		//	facturationServiceImpl.initDatabase();
+
 			// Create a billing address
 			Address billingAddress = new Address();
 			billingAddress.setNumber(20);
 			billingAddress.setStreet("rue Marie Curie");
 			billingAddress.setPostalCode(Integer.valueOf(69009));
 			billingAddress.setType(AddressType.BILLING);
-			
+
 			em.getTransaction().begin();
 			em.persist(billingAddress);
 			em.getTransaction().commit();
-			
+
 			// Create a delivery address
 			Address deliveryAddress = new Address();
 			deliveryAddress.setNumber(10);
@@ -62,26 +66,26 @@ public class Router implements SparkApplication {
 			em.getTransaction().begin();
 			em.persist(deliveryAddress);
 			em.getTransaction().commit();
-			
+
 			// Create a client
 			Client mariaC = new Client();
 			mariaC.setFirstname("Maria");
 			mariaC.setLastname("Carrey");
 			mariaC.setDeliveryAddress(billingAddress);
 			mariaC.setBillingAddress(deliveryAddress);
-			
+
 			em.getTransaction().begin();
 			em.persist(mariaC);
 			em.getTransaction().commit();
-			
+
 			// Create a description for hammer
 			Description hammerDesc = new Description();
 			hammerDesc.setDescription("It's a hammer");
-			
+
 			em.getTransaction().begin();
 			em.persist(hammerDesc);
 			em.getTransaction().commit();
-			
+
 			// Create an article : hammer
 			Article hammer = new Article();
 			hammer.setPrice(20);
@@ -91,21 +95,21 @@ public class Router implements SparkApplication {
 			em.getTransaction().begin();
 			em.persist(hammer);
 			em.getTransaction().commit();
-			
+
 			// Create a description for nail
 			Description nailDesc = new Description();
 			nailDesc.setDescription("It's a nail");
-			
+
 			em.getTransaction().begin();
 			em.persist(nailDesc);
 			em.getTransaction().commit();
-			
+
 			// Create an article : nailSteel
 			Article nailSteel = new Article();
 			nailSteel.setPrice(2);
 			nailSteel.setReference("NS_1");
 			nailSteel.setDescription(nailDesc);
-			
+
 			em.getTransaction().begin();
 			em.persist(nailSteel);
 			em.getTransaction().commit();
@@ -115,11 +119,11 @@ public class Router implements SparkApplication {
 			nailGlazier.setPrice(5);
 			nailGlazier.setReference("NG_1");
 			nailGlazier.setDescription(nailDesc);
-			
+
 			em.getTransaction().begin();
 			em.persist(nailGlazier);
 			em.getTransaction().commit();
-			
+
 			// Create a bill line for hammer
 			BillLine hammerLine = new BillLine();
 			hammerLine.setArticle(hammer);
@@ -128,7 +132,7 @@ public class Router implements SparkApplication {
 			em.getTransaction().begin();
 			em.persist(hammerLine);
 			em.getTransaction().commit();
-			
+
 			// Create a bill line for nailSteel
 			BillLine nailSteelLine = new BillLine();
 			nailSteelLine.setArticle(nailSteel);
@@ -137,7 +141,7 @@ public class Router implements SparkApplication {
 			em.getTransaction().begin();
 			em.persist(nailSteelLine);
 			em.getTransaction().commit();
-			
+
 			// Create a bill line for nailGlazier
 			BillLine nailGlazierLine = new BillLine();
 			nailGlazierLine.setArticle(nailGlazier);
@@ -146,19 +150,19 @@ public class Router implements SparkApplication {
 			em.getTransaction().begin();
 			em.persist(nailGlazierLine);
 			em.getTransaction().commit();
-			
+
 			Set<BillLine> lines = new HashSet<>();
 			lines.add(hammerLine);
 			lines.add(nailSteelLine);
 			lines.add(nailGlazierLine);
-			
+
 			// Create a bill
 			Bill mariaBill = new Bill();
 			mariaBill.setBillLines(lines);
 			mariaBill.setClient(mariaC);
 			mariaBill.setInvoiceDate(Calendar.getInstance().getTime());
 			mariaBill.setStatus(Status.PAYED);
-					
+
 			em.getTransaction().begin();
 			em.persist(mariaBill);
 			em.getTransaction().commit();
@@ -169,30 +173,50 @@ public class Router implements SparkApplication {
 		}, new FreeMarkerEngine());
 
 		get("/articles", (request, response) -> {
-			TypedQuery<Article> query = em.createQuery("from Article", Article.class);
+			TypedQuery<Article> query = FacturationRepository.getEMInstance().createQuery("from Article", Article.class);
 			List<Article> articles = query.getResultList();
-			
+
 			for (Article article : articles) {
-				System.out.println("Article [id=" + article.getId() + ", price=" + article.getPrice() + ", reference=" + article.getReference() + ", description=" + article.getDescription() + "]");
+				System.out.println(article.toString());
 			}
-			
+
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "home.ftl");
 		}, new FreeMarkerEngine());
 
 		get("/clients", (request, response) -> {
-			TypedQuery<Client> query = em.createQuery("from Client", Client.class);
+			TypedQuery<Client> query = FacturationRepository.getEMInstance().createQuery("from Client", Client.class);
 			List<Client> clients = query.getResultList();
-			
+
 			for (Client client : clients) {
-				System.out.println("Client [id=" + client.getId() + ", firstname=" + client.getFirtname() + ", lastname=" + client.getLastname() + ", billingAddress="
-				+ client.getBillingAddress() + ", deliveryAddress=" + client.getDeliveryAddress() + "]");
+				System.out.println(client.toString());
 			}
-			
+
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "home.ftl");
 		}, new FreeMarkerEngine());
 		
+		get("/factures", (request, response) -> {
+			TypedQuery<Bill> query = FacturationRepository.getEMInstance().createQuery("from Bill", Bill.class);
+			List<Bill> bills = query.getResultList();
+
+			for (Bill bill : bills) {
+				String billStr = "Bill [id=" + bill.getId() ;
+				
+				if(bill.getBillLines() != null ) {
+					for (BillLine billLine : bill.getBillLines()) {
+						billStr += ", billLines=" + billLine.toString();
+					}
+				}
+				billStr += ", client=" + bill.getClient() + ", invoiceDate=" + bill.getInvoiceDate() + ", status=" + bill.getStatus().getValue() + ", total=" + bill.calculateBillTotal() + "]";
+				
+				System.out.println(billStr);
+			}
+
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "home.ftl");
+		}, new FreeMarkerEngine());
+
 	}
 
 }

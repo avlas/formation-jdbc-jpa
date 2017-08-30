@@ -68,5 +68,11 @@ public class Address {
 //	public void setFacture(Facture facture) {
 //		this.facture = facture;
 //	}
+	
+	@Override
+	public String toString() {
+		return "Address [id=" + id + ", number=" + number + ", street=" + street + ", postalCode=" + postalCode
+				+ ", type=" + type.getValue() + "]";
+	}	
 
 }

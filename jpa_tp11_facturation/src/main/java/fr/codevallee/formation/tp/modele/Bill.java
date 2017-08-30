@@ -28,10 +28,10 @@ public class Bill {
 
 	private Status status;
 	
-	public Integer calculateBillTotal(Integer numberOfArticles, Integer price) {	
+	public Integer calculateBillTotal() {	
 		int billTotal = 0;
 		for (BillLine billLine : billLines) {
-			billTotal += billLine.calculateLineTotal(numberOfArticles, price);
+			billTotal += billLine.calculateLineTotal();
 		}
 		return Integer.valueOf(billTotal);
 	}
@@ -75,5 +75,4 @@ public class Bill {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-
 }

@@ -54,8 +54,7 @@ public class Article {
 
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", price=" + price + ", reference=" + reference + ", description=" + description
-				+ "]";
+		return "Article [id=" + id + ", price=" + price + ", reference=" + reference + ", description=" + this.getDescription() + "]";
 	}
 	
 }

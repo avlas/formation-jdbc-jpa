@@ -69,7 +69,7 @@ public class Client {
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", billingAddress="
-				+ billingAddress + ", deliveryAddress=" + deliveryAddress + "]";
+				+ this.getBillingAddress() + ", deliveryAddress=" + this.getDeliveryAddress()+ "]";
 	}
 
 //	public Set<Bill> getBill() {
