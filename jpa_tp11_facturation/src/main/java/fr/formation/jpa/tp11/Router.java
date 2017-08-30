@@ -222,11 +222,18 @@ public class Router implements SparkApplication {
 		}, new FreeMarkerEngine());
 
 		get("/bills/total", (request, response) -> {
+			TypedQuery<Bill> billsQuery = FacturationRepository.getEMInstance().createQuery("from Bill", Bill.class);
+			List<Bill> bills = billsQuery.getResultList();
 			
-			Query query = em.createNamedQuery("Bill.findByTotal");
-		
-			for (Bill bill : (List<Bill>) query.getResultList()) {
-				System.out.println(bill.toString());
+			for (Bill bill : bills) {
+				Query billsByTotalQuery = em.createNamedQuery("Bill.findByTotal");
+				billsByTotalQuery.setParameter("total", bill.calculateBillTotal());
+				
+				List<Bill> billsByTotal = billsByTotalQuery.getResultList();
+				
+				for (Bill billByTotal : billsByTotal) {
+					System.out.println(billByTotal.toString());
+				}
 			}
 
 			Map<String, Object> attributes = new HashMap<>();

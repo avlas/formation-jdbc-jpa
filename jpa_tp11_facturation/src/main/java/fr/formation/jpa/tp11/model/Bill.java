@@ -15,7 +15,7 @@ import javax.persistence.OneToMany;
 
 @NamedQueries({
 	@NamedQuery(name="Bill.findByStatus", query="select bill from Bill bill where bill.status = :status"),
-	@NamedQuery(name="Bill.findByTotal", query="select bill from Bill bill where bill.calculateBillTotal() > 50")
+	@NamedQuery(name="Bill.findByTotal", query="select bill from Bill bill where :total > 50")
 })
 @Entity
 public class Bill {
