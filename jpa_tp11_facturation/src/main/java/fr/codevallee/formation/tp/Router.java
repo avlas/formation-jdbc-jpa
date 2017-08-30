@@ -5,12 +5,14 @@ import static spark.Spark.get;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import fr.codevallee.formation.tp.modele.Address;
 import fr.codevallee.formation.tp.modele.AddressType;
@@ -166,6 +168,31 @@ public class Router implements SparkApplication {
 
 		}, new FreeMarkerEngine());
 
+		get("/articles", (request, response) -> {
+			TypedQuery<Article> query = em.createQuery("from Article", Article.class);
+			List<Article> articles = query.getResultList();
+			
+			for (Article article : articles) {
+				System.out.println("Article [id=" + article.getId() + ", price=" + article.getPrice() + ", reference=" + article.getReference() + ", description=" + article.getDescription() + "]");
+			}
+			
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "home.ftl");
+		}, new FreeMarkerEngine());
+
+		get("/clients", (request, response) -> {
+			TypedQuery<Client> query = em.createQuery("from Client", Client.class);
+			List<Client> clients = query.getResultList();
+			
+			for (Client client : clients) {
+				System.out.println("Client [id=" + client.getId() + ", firstname=" + client.getFirtname() + ", lastname=" + client.getLastname() + ", billingAddress="
+				+ client.getBillingAddress() + ", deliveryAddress=" + client.getDeliveryAddress() + "]");
+			}
+			
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "home.ftl");
+		}, new FreeMarkerEngine());
+		
 	}
 
 }

@@ -51,5 +51,11 @@ public class Article {
 	public void setDescription(Description description) {
 		this.description = description;
 	}
+
+	@Override
+	public String toString() {
+		return "Article [id=" + id + ", price=" + price + ", reference=" + reference + ", description=" + description
+				+ "]";
+	}
 	
 }
