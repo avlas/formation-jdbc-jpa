@@ -9,8 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+@NamedQueries({
+	@NamedQuery(name="Bill.findByStatus", query="select bill from Bill bill where bill.status = :status"),
+	@NamedQuery(name="Bill.findByTotal", query="select bill from Bill bill where bill.calculateBillTotal() > 50")
+})
 @Entity
 public class Bill {
 
@@ -75,4 +81,20 @@ public class Bill {
 	public void setStatus(Status status) {
 		this.status = status;
 	}
+
+	@Override
+	public String toString() {
+		String billStr = "Bill [id=" + this.getId() ;
+		
+		if(this.getBillLines() != null ) {
+			for (BillLine billLine : this.getBillLines()) {
+				billStr += ", billLines=" + billLine.toString();
+			}
+		}
+		billStr += ", client=" + this.getClient() + ", invoiceDate=" + this.getInvoiceDate() + ", status=" + this.getStatus().getValue() + ", total=" + this.calculateBillTotal() + "]";
+		
+		return billStr;
+	}
+	
+	
 }

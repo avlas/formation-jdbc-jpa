@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import fr.formation.jpa.tp11.model.Address;
@@ -161,7 +162,7 @@ public class Router implements SparkApplication {
 			mariaBill.setBillLines(lines);
 			mariaBill.setClient(mariaC);
 			mariaBill.setInvoiceDate(Calendar.getInstance().getTime());
-			mariaBill.setStatus(Status.PAYED);
+			mariaBill.setStatus(Status.NOT_PAYED);
 
 			em.getTransaction().begin();
 			em.persist(mariaBill);
@@ -196,27 +197,41 @@ public class Router implements SparkApplication {
 			return new ModelAndView(attributes, "home.ftl");
 		}, new FreeMarkerEngine());
 		
-		get("/factures", (request, response) -> {
+		get("/completeBills", (request, response) -> {
 			TypedQuery<Bill> query = FacturationRepository.getEMInstance().createQuery("from Bill", Bill.class);
-			List<Bill> bills = query.getResultList();
+			
+			for (Bill bill : (List<Bill>) query.getResultList()) {
+				System.out.println(bill.toString());
+			}
 
-			for (Bill bill : bills) {
-				String billStr = "Bill [id=" + bill.getId() ;
-				
-				if(bill.getBillLines() != null ) {
-					for (BillLine billLine : bill.getBillLines()) {
-						billStr += ", billLines=" + billLine.toString();
-					}
-				}
-				billStr += ", client=" + bill.getClient() + ", invoiceDate=" + bill.getInvoiceDate() + ", status=" + bill.getStatus().getValue() + ", total=" + bill.calculateBillTotal() + "]";
-				
-				System.out.println(billStr);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "home.ftl");
+		}, new FreeMarkerEngine());
+		
+		get("/bills/notPayed", (request, response) -> {
+			
+			Query query = em.createNamedQuery("Bill.findByStatus");
+			query.setParameter("status", Status.NOT_PAYED);
+		
+			for (Bill bill : (List<Bill>) query.getResultList()) {
+				System.out.println(bill.toString());
 			}
 
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "home.ftl");
 		}, new FreeMarkerEngine());
 
+		get("/bills/total", (request, response) -> {
+			
+			Query query = em.createNamedQuery("Bill.findByTotal");
+		
+			for (Bill bill : (List<Bill>) query.getResultList()) {
+				System.out.println(bill.toString());
+			}
+
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "home.ftl");
+		}, new FreeMarkerEngine());
 	}
 
 }
