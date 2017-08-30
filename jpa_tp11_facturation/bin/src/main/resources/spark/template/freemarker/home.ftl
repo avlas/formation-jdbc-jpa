@@ -1,6 +1,0 @@
-<html>
-
-Bonjour !
-
-
-</html>
