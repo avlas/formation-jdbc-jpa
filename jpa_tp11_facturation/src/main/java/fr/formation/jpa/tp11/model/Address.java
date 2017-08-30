@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp.modele;
+package fr.formation.jpa.tp11.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

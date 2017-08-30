@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp;
+package fr.formation.jpa.tp11;
 
 import static spark.Spark.get;
 
@@ -14,16 +14,16 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-import fr.codevallee.formation.tp.modele.Address;
-import fr.codevallee.formation.tp.modele.AddressType;
-import fr.codevallee.formation.tp.modele.Article;
-import fr.codevallee.formation.tp.modele.Bill;
-import fr.codevallee.formation.tp.modele.BillLine;
-import fr.codevallee.formation.tp.modele.Client;
-import fr.codevallee.formation.tp.modele.Description;
-import fr.codevallee.formation.tp.modele.Status;
-import fr.codevallee.formation.tp.repositories.FacturationRepository;
-import fr.codevallee.formation.tp.service.FacturationServiceImpl;
+import fr.formation.jpa.tp11.model.Address;
+import fr.formation.jpa.tp11.model.AddressType;
+import fr.formation.jpa.tp11.model.Article;
+import fr.formation.jpa.tp11.model.Bill;
+import fr.formation.jpa.tp11.model.BillLine;
+import fr.formation.jpa.tp11.model.Client;
+import fr.formation.jpa.tp11.model.Description;
+import fr.formation.jpa.tp11.model.Status;
+import fr.formation.jpa.tp11.repositories.FacturationRepository;
+import fr.formation.jpa.tp11.services.FacturationServiceImpl;
 import spark.ModelAndView;
 import spark.servlet.SparkApplication;
 import spark.template.freemarker.FreeMarkerEngine;

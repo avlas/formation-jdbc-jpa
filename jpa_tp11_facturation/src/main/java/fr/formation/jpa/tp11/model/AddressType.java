@@ -1,4 +1,4 @@
-package fr.codevallee.formation.tp.modele;
+package fr.formation.jpa.tp11.model;
 
 public enum AddressType {
 	BILLING("billing"), 
