@@ -1,9 +1,13 @@
 package fr.formation.jpa.tp11.model;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -23,8 +27,8 @@ public class Client {
 	@OneToOne
 	private Address deliveryAddress;
 
-//	@OneToMany(mappedBy="client")
-//	private Set<Bill> bill;
+	@OneToMany(mappedBy="client", fetch = FetchType.EAGER)
+	private Set<Bill> bill;
 	
 	public Integer getId() {
 		return id;
@@ -66,19 +70,18 @@ public class Client {
 		this.billingAddress = billingAddress;
 	}
 
+
+	public Set<Bill> getBill() {
+		return bill;
+	}
+
+	public void setBill(Set<Bill> bill) {
+		this.bill = bill;
+	}
+	
 	@Override
 	public String toString() {
 		return "Client [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", billingAddress="
 				+ this.getBillingAddress() + ", deliveryAddress=" + this.getDeliveryAddress()+ "]";
 	}
-
-//	public Set<Bill> getBill() {
-//		return bill;
-//	}
-//
-//	public void setBill(Set<Bill> bill) {
-//		this.bill = bill;
-//	}
-
-	
 }

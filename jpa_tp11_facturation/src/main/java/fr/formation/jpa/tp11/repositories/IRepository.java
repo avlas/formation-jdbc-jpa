@@ -6,7 +6,7 @@ public interface IRepository {
 	
 	<T> List<T> findAll (String stmt, Class<T> model);
 	
-	<T> T findbyId (Class<T> model, int id);
+	<T> T findById (Class<T> model, int id);
 	
 	<T> void insert(T t);
 	

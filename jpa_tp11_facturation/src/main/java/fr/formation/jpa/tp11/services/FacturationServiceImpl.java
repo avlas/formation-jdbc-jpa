@@ -2,6 +2,7 @@ package fr.formation.jpa.tp11.services;
 
 import java.util.Calendar;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import fr.formation.jpa.tp11.model.Address;
@@ -26,7 +27,6 @@ public class FacturationServiceImpl {
 	public FacturationServiceImpl() {
 		this.facturationRepository = new FacturationRepository();
 	}
-
 
 	public void initDatabase() {
 	
@@ -129,4 +129,12 @@ public class FacturationServiceImpl {
 		facturationRepository.insert(mariaBill);
 	}
 
+	public <T> void find(String met, String stmt, Class<T> model) {
+		List<T> list = facturationRepository.findAll(stmt, model);
+		System.out.println(met + "Size = " + list.size());
+		
+		for (T t : list) {
+			System.out.println(met + t.toString());
+		}
+	}
 }

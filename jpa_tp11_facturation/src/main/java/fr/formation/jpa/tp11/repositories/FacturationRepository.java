@@ -26,7 +26,7 @@ public class FacturationRepository implements IRepository {
 		entityManager.getTransaction().commit();
 	}
 
-	public <T> T findbyId(Class<T> model, int id) {
+	public <T> T findById(Class<T> model, int id) {
 		return entityManager.find(model, Integer.valueOf(id));
 	}
 
