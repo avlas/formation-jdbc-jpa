@@ -13,10 +13,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-@NamedQueries({
-	@NamedQuery(name="Bill.findByStatus", query="select bill from Bill bill where bill.status = :status"),
-	@NamedQuery(name="Bill.findByTotal", query="select bill from Bill bill where :total > 50")
-})
+//@NamedQueries({
+//	@NamedQuery(name="Bill.findByStatus", query="SELECT b FROM Bill b WHERE b.status = :status"),
+//	@NamedQuery(name="Bill.findByTotal", query="SELECT b FROM Bill b WHERE b.total > :total")
+//})
 @Entity
 public class Bill {
 
@@ -33,7 +33,7 @@ public class Bill {
 	private Date invoiceDate;
 
 	private Status status;
-	
+
 	public Integer calculateBillTotal() {	
 		int billTotal = 0;
 		for (BillLine billLine : billLines) {
@@ -95,6 +95,4 @@ public class Bill {
 		
 		return billStr;
 	}
-	
-	
 }

@@ -12,7 +12,6 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import fr.formation.jpa.tp11.model.Address;
@@ -35,16 +34,14 @@ public class Router implements SparkApplication {
 
 	public void init() {
 
-	//	facturationServiceImpl = new FacturationServiceImpl();
-		
-		 EntityManagerFactory entityManagerFactory =
-		 Persistence.createEntityManagerFactory("facturation");
-		 EntityManager em = entityManagerFactory.createEntityManager();
+		// facturationServiceImpl = new FacturationServiceImpl();
 
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("facturation");
+		EntityManager em = entityManagerFactory.createEntityManager();
 
 		get("/init", (request, response) -> {
 
-		//	facturationServiceImpl.initDatabase();
+			// facturationServiceImpl.initDatabase();
 
 			// Create a billing address
 			Address billingAddress = new Address();
@@ -128,7 +125,7 @@ public class Router implements SparkApplication {
 			// Create a bill line for hammer
 			BillLine hammerLine = new BillLine();
 			hammerLine.setArticle(hammer);
-			hammerLine.setNumberOfArticles(3);
+			hammerLine.setNumberOfArticles(10);
 
 			em.getTransaction().begin();
 			em.persist(hammerLine);
@@ -163,7 +160,7 @@ public class Router implements SparkApplication {
 			mariaBill.setClient(mariaC);
 			mariaBill.setInvoiceDate(Calendar.getInstance().getTime());
 			mariaBill.setStatus(Status.NOT_PAYED);
-
+		
 			em.getTransaction().begin();
 			em.persist(mariaBill);
 			em.getTransaction().commit();
@@ -174,7 +171,8 @@ public class Router implements SparkApplication {
 		}, new FreeMarkerEngine());
 
 		get("/articles", (request, response) -> {
-			TypedQuery<Article> query = FacturationRepository.getEMInstance().createQuery("from Article", Article.class);
+			TypedQuery<Article> query = FacturationRepository.getEMInstance().createQuery("from Article",
+					Article.class);
 			List<Article> articles = query.getResultList();
 
 			for (Article article : articles) {
@@ -196,10 +194,10 @@ public class Router implements SparkApplication {
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "home.ftl");
 		}, new FreeMarkerEngine());
-		
+
 		get("/completeBills", (request, response) -> {
 			TypedQuery<Bill> query = FacturationRepository.getEMInstance().createQuery("from Bill", Bill.class);
-			
+
 			for (Bill bill : (List<Bill>) query.getResultList()) {
 				System.out.println(bill.toString());
 			}
@@ -207,14 +205,15 @@ public class Router implements SparkApplication {
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "home.ftl");
 		}, new FreeMarkerEngine());
-		
+
 		get("/bills/notPayed", (request, response) -> {
-			
-			Query query = em.createNamedQuery("Bill.findByStatus");
-			query.setParameter("status", Status.NOT_PAYED);
-		
-			for (Bill bill : (List<Bill>) query.getResultList()) {
-				System.out.println(bill.toString());
+			TypedQuery<Bill> billsQuery = FacturationRepository.getEMInstance().createQuery("from Bill", Bill.class);
+			List<Bill> bills = billsQuery.getResultList();
+
+			for (Bill bill : bills) {
+				if(bill.getStatus() == Status.NOT_PAYED) {
+					System.out.println(bill.toString());
+				}
 			}
 
 			Map<String, Object> attributes = new HashMap<>();
@@ -222,20 +221,17 @@ public class Router implements SparkApplication {
 		}, new FreeMarkerEngine());
 
 		get("/bills/total", (request, response) -> {
+		
 			TypedQuery<Bill> billsQuery = FacturationRepository.getEMInstance().createQuery("from Bill", Bill.class);
 			List<Bill> bills = billsQuery.getResultList();
-			
+
 			for (Bill bill : bills) {
-				Query billsByTotalQuery = em.createNamedQuery("Bill.findByTotal");
-				billsByTotalQuery.setParameter("total", bill.calculateBillTotal());
-				
-				List<Bill> billsByTotal = billsByTotalQuery.getResultList();
-				
-				for (Bill billByTotal : billsByTotal) {
-					System.out.println(billByTotal.toString());
+				Integer total = bill.calculateBillTotal();
+				if(total > 200){
+					System.out.println(bill.toString());
 				}
 			}
-
+			
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "home.ftl");
 		}, new FreeMarkerEngine());
