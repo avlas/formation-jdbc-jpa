@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
-public class FacturationRepository {
+public class FacturationRepository implements IRepository {
 
 	private static EntityManager entityManager;
 
@@ -43,18 +43,18 @@ public class FacturationRepository {
 		entityManager.getTransaction().commit();
 	}
 
-//	public <T> void update(Class<T> model, int id, T toUpdate) {
-//		T t = entityManager.find(model, Integer.valueOf(id));
-//
-//		// entityManager.getTransaction().begin();
-//		//
-//		//// if(toUpdate.instanceOf(Client.class)) {
-//		//// t.setFirstname(toUpdate);
-//		//// t.setLastname(lastname);
-//		//// t.setAge(age);
-//		//// }
-//		// entityManager.merge(t);
-//		// entityManager.getTransaction().commit();
-//	}
+	public <T> void update(Class<T> model, int id, T toUpdate) {
+		T t = entityManager.find(model, Integer.valueOf(id));
+
+		// entityManager.getTransaction().begin();
+		//
+		//// if(toUpdate.instanceOf(Client.class)) {
+		//// t.setFirstname(toUpdate);
+		//// t.setLastname(lastname);
+		//// t.setAge(age);
+		//// }
+		// entityManager.merge(t);
+		// entityManager.getTransaction().commit();
+	}
 
 }

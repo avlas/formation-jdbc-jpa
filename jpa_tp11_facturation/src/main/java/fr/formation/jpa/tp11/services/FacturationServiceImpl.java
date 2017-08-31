@@ -13,12 +13,12 @@ import fr.formation.jpa.tp11.model.Client;
 import fr.formation.jpa.tp11.model.Description;
 import fr.formation.jpa.tp11.model.Status;
 import fr.formation.jpa.tp11.repositories.FacturationRepository;
+import fr.formation.jpa.tp11.repositories.IRepository;
 
 
 public class FacturationServiceImpl {
 
-	private FacturationRepository facturationRepository;
-	
+	private IRepository facturationRepository;
 	
 	/**
 	 * @param facturationRepository
