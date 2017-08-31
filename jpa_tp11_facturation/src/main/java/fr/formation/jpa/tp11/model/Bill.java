@@ -13,10 +13,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-//@NamedQueries({
-//	@NamedQuery(name="Bill.findByStatus", query="SELECT b FROM Bill b WHERE b.status = :status"),
-//	@NamedQuery(name="Bill.findByTotal", query="SELECT b FROM Bill b WHERE b.total > :total")
-//})
+@NamedQueries({
+	@NamedQuery(name="Bill.findByStatus", query="SELECT b FROM Bill b WHERE b.status = :status")
+})
 @Entity
 public class Bill {
 

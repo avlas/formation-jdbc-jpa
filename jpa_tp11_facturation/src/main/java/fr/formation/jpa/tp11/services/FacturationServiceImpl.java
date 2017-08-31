@@ -4,11 +4,6 @@ import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import fr.formation.jpa.tp11.model.Address;
 import fr.formation.jpa.tp11.model.AddressType;
 import fr.formation.jpa.tp11.model.Article;
@@ -20,14 +15,21 @@ import fr.formation.jpa.tp11.model.Status;
 import fr.formation.jpa.tp11.repositories.FacturationRepository;
 
 
-@Component
 public class FacturationServiceImpl {
 
-	@Autowired
 	private FacturationRepository facturationRepository;
 	
-	public void initDatabase() {
+	
+	/**
+	 * @param facturationRepository
+	 */
+	public FacturationServiceImpl() {
+		this.facturationRepository = new FacturationRepository();
+	}
 
+
+	public void initDatabase() {
+	
 		// Create a billing address
 		Address billingAddress = new Address();
 		billingAddress.setNumber(20);
@@ -94,21 +96,21 @@ public class FacturationServiceImpl {
 		// Create a bill line for hammer
 		BillLine hammerLine = new BillLine();
 		hammerLine.setArticle(hammer);
-		hammerLine.setNumberOfArticles(3);
+		hammerLine.setNumberOfArticles(50);
 
 		facturationRepository.insert(hammerLine);
 		
 		// Create a bill line for nailSteel
 		BillLine nailSteelLine = new BillLine();
 		nailSteelLine.setArticle(nailSteel);
-		nailSteelLine.setNumberOfArticles(25);
+		nailSteelLine.setNumberOfArticles(100);
 
 		facturationRepository.insert(nailSteelLine);
 		
 		// Create a bill line for nailGlazier
 		BillLine nailGlazierLine = new BillLine();
 		nailGlazierLine.setArticle(nailGlazier);
-		nailGlazierLine.setNumberOfArticles(10);
+		nailGlazierLine.setNumberOfArticles(200);
 
 		facturationRepository.insert(nailGlazierLine);
 		
@@ -116,17 +118,15 @@ public class FacturationServiceImpl {
 		lines.add(hammerLine);
 		lines.add(nailSteelLine);
 		lines.add(nailGlazierLine);
-
 		
 		// Create a bill
 		Bill mariaBill = new Bill();
 		mariaBill.setBillLines(lines);
 		mariaBill.setClient(mariaC);
 		mariaBill.setInvoiceDate(Calendar.getInstance().getTime());
-		mariaBill.setStatus(Status.PAYED);
+		mariaBill.setStatus(Status.NOT_PAYED);
 
 		facturationRepository.insert(mariaBill);
-
 	}
 
 }
