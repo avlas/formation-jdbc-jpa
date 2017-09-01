@@ -28,6 +28,21 @@ public class Article {
 	@JoinColumn(foreignKey = @ForeignKey(name="FK_ARTICLE_DESCRTIPTION_ID"))
 	public Description description;
 
+	public Article() {}
+	
+	/**
+	 * @param id
+	 * @param price
+	 * @param reference
+	 * @param description
+	 */
+	public Article(Integer price, String reference, Description description) {
+		super();
+		this.price = price;
+		this.reference = reference;
+		this.description = description;
+	}
+
 	public Integer getId() {
 		return id;
 	}

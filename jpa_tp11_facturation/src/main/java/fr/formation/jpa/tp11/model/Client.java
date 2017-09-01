@@ -39,6 +39,24 @@ public class Client {
 	@OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
 	private Set<Bill> bills;
 
+	public Client() {}
+	
+	/**
+	 * @param firstname
+	 * @param lastname
+	 * @param billingAddress
+	 * @param deliveryAddress
+	 * @param bills
+	 */
+	public Client(String firstname, String lastname, Address billingAddress, Address deliveryAddress) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.billingAddress = billingAddress;
+		this.deliveryAddress = deliveryAddress;
+		this.bills = bills;
+	}
+
 	public Integer getId() {
 		return id;
 	}

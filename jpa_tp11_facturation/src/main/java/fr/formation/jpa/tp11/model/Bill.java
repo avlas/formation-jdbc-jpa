@@ -40,6 +40,22 @@ public class Bill {
 	@Column
 	private Status status;
 
+	public Bill() {}	
+	
+	/**
+	 * @param billLines
+	 * @param client
+	 * @param invoiceDate
+	 * @param status
+	 */
+	public Bill(Date invoiceDate, Status status, Client client, Set<BillLine> billLines) {
+		super();
+		this.invoiceDate = invoiceDate;
+		this.status = status;
+		this.client = client;
+		this.billLines = billLines;	
+	}
+	
 	public Integer calculateBillTotal() {
 		int billTotal = 0;
 		for (BillLine billLine : billLines) {

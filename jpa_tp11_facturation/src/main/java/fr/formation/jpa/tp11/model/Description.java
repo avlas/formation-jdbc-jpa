@@ -8,23 +8,35 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="description")
+@Table(name = "description")
 public class Description {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
 	@Column
-	private String  description;
-//	
-//	@OneToMany
-//	public Set<Article> article = new HashSet<Article>();
+	private String description;
+	//
+	// @OneToMany
+	// public Set<Article> article = new HashSet<Article>();
+
+	public Description() {
+		
+	}
+	
+	/**
+	 * @param description
+	 */
+	public Description(String description) {
+		super();
+		this.description = description;
+	}
 
 	public Integer getId() {
 		return id;
 	}
-
+	
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -39,8 +51,7 @@ public class Description {
 
 	@Override
 	public String toString() {
-		return "[id=" + this.getId() + 
-			 ", description=" + this.getDescription() + "]";
+		return "[id=" + this.getId() + ", description=" + this.getDescription() + "]";
 	}
-		
+
 }

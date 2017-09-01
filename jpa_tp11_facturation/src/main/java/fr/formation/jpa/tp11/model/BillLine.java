@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="bill_line")
+@Table(name = "bill_line")
 public class BillLine {
 
 	@Id
@@ -19,7 +19,7 @@ public class BillLine {
 	private Integer id;
 
 	@OneToOne
-	@JoinColumn(foreignKey = @ForeignKey(name="FK_BILLLINE_ARTICLE_ID"))
+	@JoinColumn(foreignKey = @ForeignKey(name = "FK_BILLLINE_ARTICLE_ID"))
 	private Article article;
 
 	@Column
@@ -27,6 +27,19 @@ public class BillLine {
 
 	// @ManyToOne
 	// private Bill bill;
+
+	public BillLine() {
+	}
+
+	/**
+	 * @param article
+	 * @param numberOfArticles
+	 */
+	public BillLine(Article article, Integer numberOfArticles) {
+		super();
+		this.article = article;
+		this.numberOfArticles = numberOfArticles;
+	}
 
 	public Integer calculateLineTotal() {
 		return (numberOfArticles * article.getPrice());
@@ -58,10 +71,8 @@ public class BillLine {
 
 	@Override
 	public String toString() {
-		return "[id=" + this.getId() + 
-			 ", article=" + this.getArticle() + 
-			 ", numberOfArticles=" + this.getNumberOfArticles() + 
-			 ", total line=" + this.calculateLineTotal() + "]";
+		return "[id=" + this.getId() + ", article=" + this.getArticle() + ", numberOfArticles="
+				+ this.getNumberOfArticles() + ", total line=" + this.calculateLineTotal() + "]";
 	}
 
 }
