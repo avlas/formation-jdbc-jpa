@@ -2,38 +2,47 @@ package fr.formation.jpa.tp11.model;
 
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="client")
 public class Client {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@Column
 	private String firstname;
 
+	@Column
 	private String lastname;
-	
+
 	@OneToOne
+	@JoinColumn(foreignKey = @ForeignKey(name = "FK_CLIENT_BILLING_ADDRESS_ID"))
 	private Address billingAddress;
-	
+
 	@OneToOne
+	@JoinColumn(foreignKey = @ForeignKey(name = "FK_CLIENT_DELIVERY_ADDRESS_ID"))
 	private Address deliveryAddress;
 
-	@OneToMany(mappedBy="client", fetch = FetchType.EAGER)
-	private Set<Bill> bill;
-	
+	@OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+	private Set<Bill> bills;
+
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -70,18 +79,29 @@ public class Client {
 		this.billingAddress = billingAddress;
 	}
 
-
-	public Set<Bill> getBill() {
-		return bill;
+	public Set<Bill> getBills() {
+		return bills;
 	}
 
-	public void setBill(Set<Bill> bill) {
-		this.bill = bill;
+	public void setBills(Set<Bill> bills) {
+		this.bills = bills;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Client [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", billingAddress="
-				+ this.getBillingAddress() + ", deliveryAddress=" + this.getDeliveryAddress()+ "]";
+		String strClient = "[id=" + this.getId() + 
+				", firstname=" + this.getFirtname() + 
+				", lastname=" + this.getLastname() + 
+				", billingAddress=" + this.getBillingAddress() + 
+				", deliveryAddress=" + this.getDeliveryAddress();
+		
+//		if (this.getBills() != null) {
+//			for (Bill bill : this.getBills()) {
+//				strClient += ", \nbill=" + bill.toString();
+//			}
+//		}
+		strClient += "]";
+
+		return strClient;
 	}
 }

@@ -1,12 +1,17 @@
 package fr.formation.jpa.tp11.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="bill_line")
 public class BillLine {
 
 	@Id
@@ -14,8 +19,10 @@ public class BillLine {
 	private Integer id;
 
 	@OneToOne
+	@JoinColumn(foreignKey = @ForeignKey(name="FK_BILLLINE_ARTICLE_ID"))
 	private Article article;
 
+	@Column
 	private Integer numberOfArticles;
 
 	// @ManyToOne
@@ -51,7 +58,10 @@ public class BillLine {
 
 	@Override
 	public String toString() {
-		return "BillLine [id=" + id + ", article=" + article + ", numberOfArticles=" + numberOfArticles + ", total line=" + this.calculateLineTotal() + "]";
+		return "[id=" + this.getId() + 
+			 ", article=" + this.getArticle() + 
+			 ", numberOfArticles=" + this.getNumberOfArticles() + 
+			 ", total line=" + this.calculateLineTotal() + "]";
 	}
 
 }

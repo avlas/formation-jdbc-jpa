@@ -4,19 +4,22 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@NamedQueries({
-	@NamedQuery(name="Bill.findByStatus", query="SELECT b FROM Bill b WHERE b.status = :status")
-})
+@NamedQueries({ @NamedQuery(name = "Bill.findByStatus", query = "SELECT b FROM Bill b WHERE b.status = :status") })
 @Entity
+@Table(name = "bill")
 public class Bill {
 
 	@Id
@@ -24,16 +27,20 @@ public class Bill {
 	private Integer id;
 
 	@OneToMany
+	@JoinColumn(foreignKey = @ForeignKey(name = "FK_BILL_BILLLINES_ID"))
 	private Set<BillLine> billLines = new HashSet<BillLine>();
 
 	@ManyToOne
+	@JoinColumn(foreignKey = @ForeignKey(name = "FK_BILL_CLIENT_ID"))
 	private Client client;
 
+	@Column
 	private Date invoiceDate;
 
+	@Column
 	private Status status;
 
-	public Integer calculateBillTotal() {	
+	public Integer calculateBillTotal() {
 		int billTotal = 0;
 		for (BillLine billLine : billLines) {
 			billTotal += billLine.calculateLineTotal();
@@ -83,15 +90,19 @@ public class Bill {
 
 	@Override
 	public String toString() {
-		String billStr = "Bill [id=" + this.getId() ;
-		
-		if(this.getBillLines() != null ) {
+		String billStr = "\n [id=" + this.getId() +
+						", invoiceDate=" + this.getInvoiceDate() + 
+						", status=" + this.getStatus().getValue() +
+						", total=" + this.calculateBillTotal() +
+					    ", \n client=" + this.getClient();
+
+		if (this.getBillLines() != null) {
 			for (BillLine billLine : this.getBillLines()) {
-				billStr += ", billLines=" + billLine.toString();
+				billStr += ", \n billLines=" + billLine.toString();
 			}
 		}
-		billStr += ", client=" + this.getClient() + ", invoiceDate=" + this.getInvoiceDate() + ", status=" + this.getStatus().getValue() + ", total=" + this.calculateBillTotal() + "]";
-		
+		billStr += "]";
+
 		return billStr;
 	}
 }

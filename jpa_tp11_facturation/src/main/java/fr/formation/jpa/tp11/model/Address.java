@@ -1,23 +1,30 @@
 package fr.formation.jpa.tp11.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="address")
 public class Address {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
+	@Column
 	private Integer number;
 	
+	@Column
 	private String street;
 	
+	@Column
 	private Integer postalCode;
 	
+	@Column
 	private AddressType type;
 	
 //	@OneToMany
@@ -71,8 +78,12 @@ public class Address {
 	
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", number=" + number + ", street=" + street + ", postalCode=" + postalCode
-				+ ", type=" + type.getValue() + "]";
+		return "[id=" + this.getId() + 
+			 ", number=" + this.getNumber() + 
+			 ", street=" + this.getStreet() + 
+			 ", postalCode=" + this.getPostalCode()	+ 
+			 ", type=" + this.getType().getValue() + 
+			 "]";
 	}	
 
 }
